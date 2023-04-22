@@ -1,14 +1,18 @@
 
-  <template>
+   <template>
     <div class="container">
       <div class="row">
         <div v-for="pokemon in pokemons" :key="pokemon.id" class="col-lg-3 col-md-4 col-sm-6">
-          <div class="card pokemon-card">
+          <div :class="['card', { 'hovered': hoveredIndex === pokemon.id }]"
+               @mouseover="hoveredIndex = pokemon.id"
+               @mouseout="hoveredIndex = null"
+               >
             <img :src="pokemon.image" class="pokemon-image" alt="Imagem do Pokémon" :class="'bg-' + pokemon.type[0]" />
             <div class="card-body">
               <p class="card-text">#{{ pokemon.id }}</p>
               <h5 class="card-title">{{ pokemon.name }}</h5>
               <p class="card-text">{{ pokemon.type.join(', ') }}</p>
+              <button type="button" class="btn btn-primary">Details</button>
             </div>
           </div>
         </div>
@@ -23,11 +27,13 @@
     name: 'PokemonList',
     data() {
       return {
-        pokemons: []
+        pokemons: [],
+        hoveredIndex: null,
+       
       }
     },
     created() {
-        axios.get('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0')
+      axios.get('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0')
         .then(response => {
           const promises = response.data.results.map(result => {
             return axios.get(result.url);
@@ -37,7 +43,7 @@
               this.pokemons = responses.map(response => {
                 return {
                   id: response.data.id,
-                  name: response.data.name,
+                  name: response.data.name.charAt(0).toUpperCase() + response.data.name.slice(1),
                   type: response.data.types.map(t => t.type.name),
                   image: response.data.sprites.front_default
                 }
@@ -48,15 +54,17 @@
           console.log(error);
         });
     },
+   
   }
   </script>
   
   <style scoped>
+  
+
   .pokemon-image {
     width: 100%;
-    height: 150px;
+    height: 250px;
     object-fit: cover;
-    background-color: #f1f1f1;
   }
   
   .bg-grass {
@@ -85,6 +93,12 @@
   
   .card {
     margin: 10px;
+    transition: transform .2s;
+    transform: scale(1);
+  }
+  
+  .card.hovered {
+    transform: scale(1.05);
   }
   
   .container {
@@ -102,12 +116,5 @@
     .card {
       flex-basis: calc(33.33% - 20px);
     }
-  }
-  
-  @media (min-width: 769px) and (max-width: 992px) {
-    .card {
-      flex-basis: calc(25% - 20px);
-    }
-  }
-  </style>
-  
+}
+</style>
