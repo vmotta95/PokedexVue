@@ -12,7 +12,7 @@ export default{
 
 <style scoped>
 .header {
-    background-color: aqua;
+    background-color:  #42b983;
 
 }
 
