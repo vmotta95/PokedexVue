@@ -1,21 +1,10 @@
 <template>
-  <TheHeader/>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <PokemonList />
+  <nav>
+    <router-link to="/">Pokedex</router-link> |
+    <router-link to="/about">About</router-link>
+  </nav>
+  <router-view/>
 </template>
-
-<script>
-import TheHeader from './components/TheHeader.vue'
-import PokemonList from './components/PokemonList.vue'
-
-export default {
-  name: 'App',
-  components: {
-    TheHeader,
-    PokemonList,
-  }
-}
-</script>
 
 <style>
 #app {
@@ -24,9 +13,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background-color: #2c3e50;
-  margin-top: 60px;
-  margin: 0;
-  padding: 0;
 }
 
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #f7f7f7;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
 </style>
