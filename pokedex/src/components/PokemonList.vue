@@ -1,4 +1,5 @@
 
+  
    <template>
     <div class="container">
       <div class="row">
@@ -12,7 +13,7 @@
               <p class="card-text">#{{ pokemon.id }}</p>
               <h5 class="card-title">{{ pokemon.name }}</h5>
               <p class="card-text">{{ pokemon.type.join(', ') }}</p>
-              <button type="button" class="btn btn-primary">Details</button>
+              <button type="button" class="btn btn-primary"  @click="goToDetails(pokemon.id)">Detalhes</button>
             </div>
           </div>
         </div>
@@ -21,42 +22,48 @@
   </template>
   
   <script>
-  import axios from 'axios';
-  
-  export default {
-    name: 'PokemonList',
-    data() {
-      return {
-        pokemons: [],
-        hoveredIndex: null,
-       
-      }
-    },
-    created() {
-      axios.get('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0')
-        .then(response => {
-          const promises = response.data.results.map(result => {
-            return axios.get(result.url);
-          });
-          Promise.all(promises)
-            .then(responses => {
-              this.pokemons = responses.map(response => {
-                return {
-                  id: response.data.id,
-                  name: response.data.name.charAt(0).toUpperCase() + response.data.name.slice(1),
-                  type: response.data.types.map(t => t.type.name),
-                  image: response.data.sprites.front_default
-                }
-              })
-            })
-        })
-        .catch(error => {
-          console.log(error);
+import axios from 'axios';
+
+export default {
+  name: 'PokemonList',
+  data() {
+    return {
+      pokemons: [],
+      hoveredIndex: null,
+     
+    }
+  },
+  created() {
+    axios.get('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0')
+      .then(response => {
+        const promises = response.data.results.map(result => {
+          return axios.get(result.url);
         });
+        Promise.all(promises)
+          .then(responses => {
+            this.pokemons = responses.map(response => {
+              return {
+                id: response.data.id,
+                name: response.data.name.charAt(0).toUpperCase() + response.data.name.slice(1),
+                type: response.data.types.map(t => t.type.name),
+                image: response.data.sprites.front_default
+              }
+            })
+          })
+      })
+      .catch(error => {
+        console.log(error);
+      });
+        
+  },
+  methods: {
+    goToDetails(pokemonId) {
+      this.$router.push({ name: "details", params: { pokemonId: pokemonId } });
     },
-   
-  }
-  </script>
+  },
+ 
+}
+</script>
   
   <style scoped>
   

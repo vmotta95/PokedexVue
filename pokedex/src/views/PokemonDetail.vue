@@ -1,22 +1,22 @@
 <template>
-  <div class="home">
+  <div class="about">
     <TheHeaderVue/>
     <img alt="Vue logo" src="../assets/logo.png">
-    <PokemonList/>
+    <PokemonDetails/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import PokemonList from '@/components/PokemonList.vue';
+// @ is an alias to /src;
 import TheHeaderVue from '@/components/TheHeader.vue'
+import PokemonDetails from '@/components/PokemonDetails.vue';
 
 
 export default {
   name: 'HomeView',
   components: {
-    PokemonList,
-    TheHeaderVue
+    TheHeaderVue,
+    PokemonDetails
   }
 }
 </script>
