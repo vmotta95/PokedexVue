@@ -1,25 +1,22 @@
 <template>
-  <div class="home">
+  <div class="about">
     <TheHeaderVue/>
-    <nav>
-  </nav>
     <img alt="Vue logo" src="../assets/logo.png">
-    <PokemonList/>
+    <PokemonDetails/>
     <TheFooterVue/>
+
   </div>
 </template>
-
 <script>
-import PokemonList from '@/components/PokemonList.vue';
 import TheHeaderVue from '@/components/TheHeader.vue'
+import PokemonDetails from '@/components/PokemonDetails.vue';
 import TheFooterVue from '@/components/TheFooter.vue';
-
 
 export default {
   name: 'HomeView',
   components: {
-    PokemonList,
     TheHeaderVue,
+    PokemonDetails,
     TheFooterVue
   }
 }
