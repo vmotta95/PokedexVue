@@ -2,7 +2,7 @@
 
 ## 📑 Sobre o projeto
 
-Esta é uma aplicação para aprnder conceitos de Vue e Bootsrap
+Esta é uma aplicação para aprender conceitos de Vue e Bootsrap de forma prática.
 
 ## ✍🏻 Funcionalidades
 
