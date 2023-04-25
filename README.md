@@ -4,6 +4,9 @@
 
 Esta é uma aplicação para aprender conceitos de Vue e Bootsrap de forma prática.
 
+## 📑 Deploy
+https://knowledgeable-bottle.surge.sh/#/
+
 ## ✍🏻 Funcionalidades
 
 - Consumo de API
